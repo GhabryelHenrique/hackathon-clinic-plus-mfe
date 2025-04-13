@@ -1,59 +1,70 @@
-# RemoteApp
+# 🧩 Hackathon Clinic Plus - MFE (Micro Frontend)
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.7.
+Este é um dos MFEs (Micro Frontends) do Hackathon **Clinic Plus**, desenvolvido em **Angular 19** com **Module Federation nativa** e **esbuild**.
 
-## Development server
+Ele será carregado dinamicamente pela aplicação principal: [`hackathon-clinic-plus-shell`](https://github.com/seu-usuario/hackathon-clinic-plus-shell)
 
-To start a local development server, run:
+## 📦 Tecnologias Utilizadas
 
-```bash
-ng serve
+- Angular 19
+- Native Module Federation via `@angular/core/federation`
+- Esbuild
+- Standalone Components
+- Lazy Loading via Remote Entry
+
+## 📁 Organização
+
+```
+hackathon-clinic-plus-mfe/
+├── src/
+│   ├── app/
+│   │   └── profile/
+│   │       └── profile.component.ts
+├── federation.config.ts
+├── angular.json
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## 🚀 Como Rodar
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+### 1. Instalar dependências
 
 ```bash
-ng generate component component-name
+npm install
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+### 2. Rodar o MFE (porta 4201)
 
 ```bash
-ng generate --help
+ng serve --port 4201
 ```
 
-## Building
+---
 
-To build the project run:
+## 🧩 Este MFE expõe:
 
-```bash
-ng build
+```ts
+'./ProfileComponent': './src/app/profile/profile.component.ts'
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Ele pode ser importado dinamicamente pela Shell da seguinte forma:
 
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
+```ts
+loadComponent: () => import('mfeProfile/ProfileComponent').then(m => m.ProfileComponent)
 ```
 
-## Running end-to-end tests
+---
 
-For end-to-end (e2e) testing, run:
+## 🛠️ Como criar e expor um novo componente
 
-```bash
-ng e2e
-```
+1. Crie um novo componente standalone
+2. Exponha em `federation.config.ts`
+3. Atualize a rota na aplicação Shell
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+---
 
-## Additional Resources
+## 🤝 Contribuindo
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Sinta-se à vontade para:
+- Criar novos MFEs
+- Customizar componentes
+- Propor melhorias
